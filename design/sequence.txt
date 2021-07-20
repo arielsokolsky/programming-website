@@ -1,0 +1,36 @@
+Client
+Server
+RequestHandler
+LoginHandler
+LoginManager
+Database
+CookieManager
+
+Client- GET / ->Server
+Server- web page ->Client
+
+Client- GET /connection ->Server
+/alt has cookie
+	Server- checkCookie(cookie) ->CookieManager
+	CookieManager- return true / false ->Server
+/alt checkCookie ret true
+	Server- resetState(cookie) ->CookieManager
+/alt no cookie OR checkCookie ret false
+	Server- addCookie() ->CookieManager
+Server- SetCookie ->Client
+
+Client- POST /login ->Server
+Server- handleRequest(req, res) ->RequestHandler
+RequestHandler- login(name, password) ->LoginHandler
+LoginHandler- loginValid(name, password) ->LoginManager
+LoginManager- select("password, id from users bt name") ->Database
+Database- password, id ->LoginManager
+/alt password valid
+	LoginManager- true ->LoginHandler
+	LoginHandler- RequestResult({"ok": true}, new MenuHandler) ->RequestHandler
+/alt password invalid
+	LoginManager- false ->LoginHandler
+	LoginHandler- RequestResult({"ok": false}) ->RequestHandler
+RequestHandler- resposne.send(...) ->Client
+RequestHandler- return ->Server
+

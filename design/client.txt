@@ -1,0 +1,57 @@
+Login:class
+
+Signup:class
+
+Home:class
+
+Feed:class
+
+CreateChallenge:class
+
+Challenge:class
+
+PersonalPage:class
+
+UploadPost:class
+
+Settings:class
+
+Post
+
+ChallengePost
+
+Comment
+
+SearchBar
+
+InputField
+
+SideBar
+SideBar <-- Settings
+SideBar <-- Home
+SideBar <-- PersonalPage
+SideBar <-- Login
+
+Login <--> Signup
+Login --> Home
+Signup --> Home
+
+Home --> Feed
+Home --> PersonalPage
+Feed --> Challenge
+Feed -- Post
+
+Feed --> SearchBar
+PersonalPage --> SearchBar
+
+PersonalPage --> CreateChallenge
+PersonalPage <--> UploadPost
+PersonalPage -- Post
+
+Post -- Comment
+Post --> ChallengePost
+
+Helper
+	+static get(url)
+	+static post(url, data)
+

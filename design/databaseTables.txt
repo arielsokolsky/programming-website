@@ -1,0 +1,47 @@
+Challenges
+	+id - GlobalId.id
+	+title
+	+description
+	+startingCode
+	+test
+	+author_id - Users.id
+Challenges --> Users
+Challenges --> GlobalId
+
+Users
+	+id
+	+name
+	+password
+	+points
+
+Posts
+	+id - GlobalId.id
+	+author_id - Users.id
+	+title
+	+content
+Posts --> Users
+Posts --> GlobalId
+
+Comments
+	+id - GlobalId.id
+	+postId - Posts.id/Challenges.id
+	+content
+Comments --> Posts
+Comments --> Challenges
+Comments --> GlobalId
+
+GlobalId
+	+id
+
+Likes
+	+id
+	+userId - Users.id
+	+objectId - GlobalId.id
+	+value
+Likes --> Users
+
+Subscribers
+	+id
+	+srcUser - Users.id
+	+dstUser - Users.id
+Subscribers --> Users

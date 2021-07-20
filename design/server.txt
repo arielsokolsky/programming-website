@@ -1,0 +1,83 @@
+Main
+	+runServer(port)
+
+Database
+	constructor(filePath)
+	+database
+	+select(sql) : list
+	+run(sql)
+
+Managers
+	// creates all managers and database
+	constructor(database)
+	+loginManager
+	+cookieManager
+	+executionManager
+
+RequestHandler:interface
+	constructor(managers)
+	+managers
+	+handleRequest(request, response)
+	// gets function to run (login, signup...)
+	+getHandler(request) : handlerFunction
+
+LoginHandler
+	+requests <path - handlerFunction>
+	constructor(cookie)
+	-login(name, password) : RequestResult
+	-signup(name, password) : RequestResult
+
+MenuHandler
+	+requests <path - handlerFunction>
+	constructor(cookie, userId)
+	-todo...
+
+ChallengeHandler
+	+requests <path - handlerFunction>
+	constructor(cookie, userId, challengeId)
+	-todo...
+
+CookieManager
+	+object <cookie - RequestHandler>
+	// checks if cookie is valid
+	+checkCookie(cookie) : bool
+	// creates cookie and loginHandler
+	+addCookie() : cookie
+	// stops session and deletes cookie
+	+removeCookie(cookie)
+	// resets connection to home page
+	-resetState(cookie)
+	// returns current RequestHandler
+	+getHandler(cookie) : RequestHandler
+
+LoginManager
+	constructor(database)
+	+Database
+	+addUser(name, password)
+	+removeUser(name)
+	+loginValid(name, password) : bool
+	+userExists(name) : bool
+
+ExecutionManager
+	constructor(database)
+	-test(code, challengeId)
+
+_RequestResult_
+	constructor(jsonResponse, newHandler)
+	+jsonResposne
+	+newHandler
+
+Main --<> Managers
+
+Managers --<> LoginManager
+Managers --<> CookieManager
+Managers --<> ExecutionManager
+LoginManager --<> Database
+
+CookieManager --<> RequestHandler
+
+RequestHandler --<> _RequestResult_
+
+LoginHandler <-- RequestHandler
+MenuHandler <-- RequestHandler
+ChallengeHandler <-- RequestHandler
