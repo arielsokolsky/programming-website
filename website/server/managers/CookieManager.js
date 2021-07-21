@@ -39,6 +39,8 @@ class CookieManager
         return;
     }
 
+    getState(){}
+    setState(){}
 }
 
 module.exports = CookieManager;

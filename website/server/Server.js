@@ -4,6 +4,7 @@ const path = require('path');
 const config = require('./Config.json');
 const Database = require('./Database.js');
 const Managers = require('./managers/Managers.js');
+const Helper = require('./Helper.js');
 
 const app = express();
 const PORT = 8080;
@@ -26,9 +27,30 @@ app.use(express.static(path.join(__dirname, '../build')));
 	let managers = new Managers(database);
 
 	// get app
-	app.get('/', function (request, result) 
+	app.get('/', function (request, response) 
 	{
-		result.sendFile(path.join(__dirname, 'build', 'index.html'));
+		response.sendFile(path.join(__dirname, 'build', 'index.html'));
+	});
+
+	// create connection and handle cookies
+	app.get('/connection', function(request, response)
+	{
+		let cookie = Helper.getCookie(request);
+		if(managers.cookieManager.checkCookie(cookie))
+		{
+			managers.cookieManager.resetState();
+		}
+		else
+		{
+			cookie = managers.cookieManager.addCookie();
+			response.cookie("sessionKey", cookie);
+		}
+		response.send('{}');
+	});
+
+	app.post('*', function (request, response)
+	{
+		managers.cookieManager.getState().handleRequest(request, response);
 	});
 
 	app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
