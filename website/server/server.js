@@ -1,4 +1,5 @@
 const express = require('express');
+const CookieManager = require('./CookieManager');
 const path = require('path');
 
 const config = require('./Config.json');
