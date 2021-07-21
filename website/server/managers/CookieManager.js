@@ -9,13 +9,11 @@ class CookieManager
     {
         this.stateMap = {};
     }
-
     //check if cookie exists
     checkCookie(cookie)
     {
         return cookie in this.stateMap;
     }
-
     //return random cookie
     addCookie()
     {
@@ -24,23 +22,28 @@ class CookieManager
         this.stateMap[cookie] = undefined;  //to do : set to new request handler
         return cookie;
     }
-
     //remove a cookie from the dictinary
     removeCookie(cookie)
     {
         delete this.stateMap[cookie];
         return;
     }
-
     //get a cookie and reset the requestHandler
     resetState(cookie)
     {
         this.stateMap[cookie] = undefined;  //to do : set to new request handler
         return;
     }
-
-    getState(){}
-    setState(){}
+    //get user's state 
+    getState(cookie)
+    {
+        return this.stateMap[cookie];
+    }
+    //set the user's state
+    setState(cookie, newHandler)
+    {
+        this.stateMap[cookie] = newHandler;
+    }
 }
 
 module.exports = CookieManager;

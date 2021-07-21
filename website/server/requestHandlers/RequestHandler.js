@@ -36,3 +36,6 @@ function RequestResponse(responseObject, newRequestHandler)
     this.respsoneJson = JSON.stringify(responseObject);
     this.newHandler = newRequestHandler;
 }
+
+module.exports.RequestHandler = RequestHandler;
+module.exports.RequestResponse = RequestResponse;

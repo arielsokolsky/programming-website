@@ -1,15 +1,10 @@
-const LoginManager = require('./managers/LoginManager');
+const {RequestHandler, RequestResponse } = require("./RequestHandler")
 
 class LoginHandler extends RequestHandler
 {
     requests = {
         "/login": this.login,
         "/signup": this.signup
-    };
-
-    constructor(managers, cookie)
-    {
-        super(managers, cookie);
     };
 
     async login({ name, password })
@@ -20,11 +15,11 @@ class LoginHandler extends RequestHandler
         {
             await loginManager.loginValid(name, password);
             //to do: change undefined to menuHandler
-            return new RequestResult({message : "ok", undefined});
+            return new RequestResponse({message : "ok", undefined});
         }
         catch (error)
         {
-            return new RequestResult({error : error.message });
+            return new RequestResponse({error : error.message });
         }
     }
 
@@ -33,6 +28,8 @@ class LoginHandler extends RequestHandler
         let loginManager = this.managers.loginManager;
         let userExists = await loginManager.userExists(name, password)
         let response = userExists ? {message : "ok"} : { error: "signup failed" };
-        return new RequestResult(response);
+        return new RequestResponse(response);
     }
 }
+
+module.exports.LoginHandler = LoginHandler;
