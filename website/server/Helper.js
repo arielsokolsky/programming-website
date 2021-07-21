@@ -16,6 +16,11 @@ class Helper
     {
         return Math.floor(Math.random() * (max - min) + min) + 1;
     }
+    // function gives URL path from
+    static path(request)
+    {
+        return request.baseUrl + request.path;
+    }
 }
 
 module.exports = Helper;
