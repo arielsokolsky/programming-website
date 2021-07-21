@@ -26,8 +26,8 @@ app.use(express.static(path.join(__dirname, '../build')));
 	let managers = new Managers(database);
 
 	// get app
-	app.get('/', function (req, res) {
-		res.sendFile(path.join(__dirname, 'build', 'index.html'));
+	app.get('/', function (request, result) {
+		result.sendFile(path.join(__dirname, 'build', 'index.html'));
 	});
 
 	app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
