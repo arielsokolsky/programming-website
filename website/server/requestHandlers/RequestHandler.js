@@ -10,7 +10,15 @@ class RequestHandler
     // method handles a request from user and returns an response. an async method.
     async handleRequest(request, response)
     {
-        let result = await this.getHandler(request)(request.body);
+        let result;
+        try
+        {
+            result = await this.getHandler(request)(request.body);
+        }
+        catch(error)
+        {
+            response.send('{error: invalid request}');
+        }
         // update state using cookie
         this.managers.cookieManager.setState(this.cookie, result.newHandler);
         // send respons
