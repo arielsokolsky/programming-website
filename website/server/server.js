@@ -1,5 +1,9 @@
 const express = require('express');
 const path = require('path');
+
+const config = require('./Config.json');
+const Database = require('./Database.js');
+
 const app = express();
 const PORT = 8080;
 
