@@ -1,0 +1,4 @@
+{
+    "COOKIE_LENGTH":16,
+    "COOKIE_CHARS" : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+}
