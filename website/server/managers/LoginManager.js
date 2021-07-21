@@ -25,15 +25,17 @@ class LoginManager
     loginValid(name, password)
     {
         let hashedPassword = this.hash(password);
-        const LOGIN_FAILED = "login failed", INCORRECT_PASSWORD = "incorrect password";
+        const INCORRECT_USER = "incorrect username", INCORRECT_PASSWORD = "incorrect password";
         return this.database.select(`SELECT password, id FROM Users WHERE name = ?;`, [name])
             .then(
                 data =>
                 {
                     // check if exactly one user was found
-                    if (data.length === 1)
+                    if (data.length === 0)
+                        throw new Error(INCORRECT_USER);
+                    else if (data.length === 1)
                         data = data[0];
-                    else throw new Error(LOGIN_FAILED);
+                    else throw new Error("two users with the same name in the database");
                     // compare passwords to check validity
                     if (hashedPassword === data.password)
                         return data.id;
@@ -44,7 +46,7 @@ class LoginManager
             .catch(
                 error =>
                 {
-                    if (error.message !== LOGIN_FAILED && error.message !== INCORRECT_PASSWORD)
+                    if (error.message !== INCORRECT_USER && error.message !== INCORRECT_PASSWORD)
                     {
                         Helper.log(error);
                         throw new Error("server error");
