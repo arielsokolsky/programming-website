@@ -1,5 +1,5 @@
-const config = require("./Config.json");
-const Helper = require("./Helper")
+const config = require("../Config.json");
+const Helper = require("../Helper")
 
 //this class is responsible for managing the cookies
 class CookieManager
