@@ -26,7 +26,8 @@ app.use(express.static(path.join(__dirname, '../build')));
 	let managers = new Managers(database);
 
 	// get app
-	app.get('/', function (request, result) {
+	app.get('/', function (request, result) 
+	{
 		result.sendFile(path.join(__dirname, 'build', 'index.html'));
 	});
 
