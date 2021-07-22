@@ -1,13 +1,13 @@
 import  React, { useState } from "react";
 import './InputField.css';
 
-//component for input and label
+// component for input and label
 const InputField = props =>
 {
     const { name = "", placeholder = "", setValue = () => { }, type = "type", labelOnTop = "false" } = props;
     const [text, setText] = useState("");
 
-    //saves input and passes it to parent
+    // saves input and passes it to parent
     function inputHandler(e)
     {
         setText(e.target.value);
@@ -27,7 +27,7 @@ const InputField = props =>
                 onInput={inputHandler}
             />
         </div>
-    )
+    );
 }
 
 export default InputField;
