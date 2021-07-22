@@ -1,5 +1,6 @@
 import './App.css';
 import { useState } from 'react';
+import Signup from './pages/Signup';
 import Login from './pages/Login.js';
 
 const themePaths = ["colorPalettes/darkTheme.css", "colorPalettes/lightTheme.css"];
@@ -20,9 +21,8 @@ function App()
 				@import url('https://fonts.googleapis.com/css2?family=Doppio+One&display=swap');
 			</style>
 			<link href={themePaths[colorPalette]} rel="stylesheet" />
-			
-			<Login />
 		</div>
+		
 	);
 }
 
