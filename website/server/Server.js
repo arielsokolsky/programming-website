@@ -35,17 +35,19 @@ app.use(express.static(path.join(__dirname, '../build')));
 	// create connection and handle cookies
 	app.get('/connection', function(request, response)
 	{
+		let loggedIn = false;
 		let cookie = Helper.getCookie(request);
 		if(managers.cookieManager.checkCookie(cookie))
 		{
 			managers.cookieManager.resetState();
+			loggedIn = true;
 		}
 		else
 		{
 			cookie = managers.cookieManager.addCookie();
 			response.cookie("sessionKey", cookie);
 		}
-		response.send('{}');
+		response.send(JSON.stringify({ loggedIn: loggedIn }));
 	});
 
 	app.post('*', function (request, response)

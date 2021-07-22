@@ -2,6 +2,7 @@ import './Login.css';
 import InputField from '../components/InputField.js';
 import { useState } from 'react';
 import Fetch from '../Fetch.js';
+import { Link, useHistory } from 'react-router-dom';
 
 const LOGIN_URL = "https://localhost:8080/login";
 
@@ -10,22 +11,16 @@ function Login()
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
-
-	// function routes to signup page
-	function signup()
-	{
-		// TODO: route to /signup
-		console.log("/signup");
-	}
+	const history = useHistory();
 
 	// function attempts to log into the website
 	async function login()
 	{
 		let data = await Fetch.post(LOGIN_URL, { name: username, password: password });
-		
+
 		if (data.ok)
 		{
-			// TODO: route to /home
+			history.push({ pathname: "/home" });
 			console.log("/home");
 		}
 		else
@@ -46,7 +41,9 @@ function Login()
 				setValue={setPassword} type="password" labelClass="loginLabel" inputClass="loginInput" />
 			<h3 className="loginError">{error}</h3>
 			
-			<button className="loginButton" onClick={signup}>Signup</button>
+			<Link to="/signup">
+				<button className="loginButton">Signup</button>
+			</Link>
 			<button className="loginButton" onClick={login}>Login</button>
 		</div>
 	);
