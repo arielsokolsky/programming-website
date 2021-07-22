@@ -1,10 +1,12 @@
 *{
 	font-family: 'Doppio One', sans-serif;
 }
+
 html
 {
     background-color: var(--background1);
 }
+
 body 
 {
 	margin: 0;
@@ -35,7 +37,7 @@ button:active
 	transform: translateY(3px);
 }
 
-input 
+input
 {
 	padding: 2px 6px;
 	border: solid 1px;
@@ -46,6 +48,6 @@ input
 }
 input:focus
 {
-	filter: brightness(110%);
+	filter: brightness(120%);
 	transition: filter 0.5s;
 }
