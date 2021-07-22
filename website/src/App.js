@@ -1,6 +1,6 @@
 import './App.css';
 import { useState } from 'react';
-import Fetch from './Fetch';
+import Login from './pages/Login.js';
 
 const themePaths = ["colorPalettes/darkTheme.css", "colorPalettes/lightTheme.css"];
 
@@ -19,7 +19,9 @@ function App()
 				{/* import font Doppio One */}
 				@import url('https://fonts.googleapis.com/css2?family=Doppio+One&display=swap');
 			</style>
-			<link href={themePaths[colorPalette]} rel="stylesheet"/>
+			<link href={themePaths[colorPalette]} rel="stylesheet" />
+			
+			<Login />
 		</div>
 	);
 }
