@@ -2,6 +2,7 @@ import './Signup.css';
 import InputField from '../components/InputField';
 import { useState } from 'react';
 import Fetch from '../Fetch';
+import { Link, useHistory } from 'react-router-dom';
 
 const SERVER_URL = "http://localhost:8080";
 
@@ -11,23 +12,19 @@ function Signup()
     const [password, setPassword] = useState("");
     const [validate, setValidate] = useState("");
     const [error, setError] = useState("");
+    const history = useHistory();
     
     async function signup()
     {
-        let response = await Fetch().post(SERVER_URL + "/signup", { name, password });
+        let response = await Fetch.post(SERVER_URL + "/signup", { name, password });
         if (response.ok)
         {
-            // to do: route to /login
+            history.push({ pathname: "/login" });
         }
         else
         {
             setError(response.error ? response.error: "unknown error");
         }
-    }
-
-    function login()
-    {
-        // to do: route to /login
     }
 
     return (
@@ -40,7 +37,9 @@ function Signup()
             <h1 className="signupError">{error}</h1>
             <button onClick={signup} className="signupButton">Signup</button>
             <br />
-            <button onClick={login} className = "signupButton">Login</button>
+            <Link to='/login'>
+                <button className="signupButton">Login</button>
+            </Link>
         </div>
 
     );
