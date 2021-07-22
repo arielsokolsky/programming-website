@@ -2,8 +2,8 @@ import './Signup.css';
 import InputField from '../components/InputField';
 import { useState } from 'react';
 import Fetch from '../Fetch';
-import { wait } from '@testing-library/react';
-const SERVER_URL = "http://localhost:8080"
+
+const SERVER_URL = "http://localhost:8080";
 
 function Signup()
 {
@@ -17,7 +17,7 @@ function Signup()
         let response = await Fetch().post(SERVER_URL + "/signup", { name, password });
         if (response.ok)
         {
-            //to do: route to /login
+            // to do: route to /login
         }
         else
         {
@@ -27,7 +27,7 @@ function Signup()
 
     function login()
     {
-        //to do: route to /login
+        // to do: route to /login
     }
 
     return (
@@ -44,9 +44,6 @@ function Signup()
         </div>
 
     );
-
-
-
 }
 
 export default Signup;

@@ -1,14 +1,13 @@
 .signupError
 {
     color: red;
-    font-size:x-large;
-    
+    font-size: x-large;   
 }
 
 .signupLabel
 {
     color: var(--secondary3);
-    font-size:x-large;
+    font-size: x-large;
 }
 
 .signupInput
@@ -16,7 +15,7 @@
     text-align: center;
     color: var(--foreground2);
     background-color: var(--background2 );
-    font-size:x-large;
+    font-size: x-large;
     margin: 5px;
 }
 
@@ -28,7 +27,7 @@
 .signupButton
 {
     margin: 20px;
-    font-size:x-large;
+    font-size: x-large;
     color: var(--foreground1);
     background-color: var(--background3);
     padding: 10px 20px;
