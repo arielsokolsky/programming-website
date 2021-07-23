@@ -1,0 +1,6 @@
+{
+    "COOKIE_LENGTH": 16,
+    "COOKIE_CHARS": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
+    "DATABASE_FILE": "./Database.db",
+    "PASSWORD_SALT": "PlATyPus sAlT VeRY SECrEt"
+}

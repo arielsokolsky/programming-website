@@ -1,0 +1,56 @@
+html
+{
+    height: 100%;
+    box-shadow: 0 0 100px 0px rgba(255, 255, 255, 0.1) inset;
+}
+
+input.loginInput
+{
+    background-color: var(--primary1);
+    color: var(--foreground1);
+    border-color: var(--primary3);
+    width: 75%;
+    font-size: large;
+}
+
+.loginLabel
+{
+    font-size: larger;
+    color: var(--foreground1);
+}
+
+.loginDiv
+{
+    margin-top: 60px;
+    width: 30%;
+    margin-left: 35%;
+    text-align: center;
+    padding-bottom: 30px;
+}
+.loginDiv > *
+{
+    padding: 10px;
+}
+
+.loginTitle
+{
+	color: var(--secondary3);
+}
+
+.loginButton
+{
+    font-size: large;
+    margin: 25px;
+    margin-top: 30px;
+    background-color: var(--primary3);
+    color: var(--foreground1);
+    width: 80px;
+    height: 45px;
+}
+
+.loginError
+{
+    height: 30px;
+    margin: 0;
+    color: red;
+}

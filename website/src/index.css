@@ -1,0 +1,53 @@
+*{
+	font-family: 'Doppio One', sans-serif;
+}
+
+html
+{
+    background-color: var(--background1);
+}
+
+body 
+{
+	margin: 0;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code 
+{
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+button
+{
+	text-align: center;
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;
+	box-shadow: 0 5px #999;
+}
+button:hover
+{
+	filter: brightness(80%);
+}
+button:active 
+{
+	box-shadow: 0 2px #888;
+	transform: translateY(3px);
+}
+
+input
+{
+	padding: 2px 6px;
+	border: solid 1px;
+	border-radius: 4px;
+	outline: none;
+	caret-color: var(--foreground1);
+	transition: filter 0.5s;
+}
+input:focus
+{
+	filter: brightness(120%);
+	transition: filter 0.5s;
+}
