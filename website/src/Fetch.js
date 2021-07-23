@@ -22,9 +22,7 @@ class Fetch
     //POST request to server. param data as obejct
     static post(url, data)
     {
-        console.log(data);
         let dataAsJson = JSON.stringify(data);
-        console.log(dataAsJson);
         const requestOptions =
         {
             method: 'POST',

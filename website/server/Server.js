@@ -40,7 +40,6 @@ app.use(express.static(path.join(__dirname, '../build')));
 		let cookie = Helper.getCookie(request);
 		if(managers.cookieManager.checkCookie(cookie))
 		{
-			Helper.log(managers.cookieManager.getState(cookie));
 			if (!(managers.cookieManager.getState(cookie) instanceof LoginHandler))
 			{
 				managers.cookieManager.resetState();
