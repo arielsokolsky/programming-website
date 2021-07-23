@@ -22,7 +22,7 @@ function App()
 		{
 			(async function ()
 			{
-				let data = await Fetch.get("/connection");
+				let data = await Fetch.get("http://localhost:8080/connection");
 				if (data.loggedIn)
 					history.push({ pathname: "/home" });
 				else

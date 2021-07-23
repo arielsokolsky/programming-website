@@ -10,7 +10,7 @@ class Helper
         let string = "";
         for (let index = 0; index < length; index++) 
         {   
-            string += charOptions[this.randomInt(0, charOptions.length)];
+            string += charOptions[this.randomInt(0, charOptions.length - 1)];
         }
         return string;
     }
@@ -32,10 +32,10 @@ class Helper
     // function gets request's cookie value if it exists
     static getCookie(request)
     {
-        if(request.headers.cookie === "")
-            return "";
-        else
+        if (request.headers.cookie)
             return request.headers.cookie.split('=')[1];
+        else
+            return "";
     }
     // saves log
     static log(string)

@@ -16,7 +16,7 @@ function Signup()
     
     async function signup()
     {
-        let response = await Fetch.post(SERVER_URL + "/signup", { name, password });
+        let response = await Fetch.post(SERVER_URL + "/signup", { name: name, password: password });
         if (response.ok)
         {
             history.push({ pathname: "/login" });
@@ -33,7 +33,7 @@ function Signup()
             <InputField name="The name " placeholder="Enter name" setValue={setName} type="text" labelOnTop={true} labelClass = "signupLabel" inputClass ="signupInput"/>
             <InputField name="Password " placeholder="Enter password" setValue={setPassword} type="password" labelOnTop={true} labelClass = "signupLabel" inputClass ="signupInput"/>
             <InputField name="Password " placeholder="Enter password" setValue={setValidate} type="password" labelOnTop={true} labelClass = "signupLabel" inputClass ="signupInput"/>
-            <h1 className="signupError">{(password == validate || validate == "") ? "" : "your password is invalid. please try again"}</h1>
+            <h1 className="signupError">{(password === validate || validate === "") ? "" : "your password is invalid. please try again"}</h1>
             <h1 className="signupError">{error}</h1>
             <button onClick={signup} className="signupButton">Signup</button>
             <br />

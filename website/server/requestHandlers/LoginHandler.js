@@ -3,8 +3,8 @@ const { RequestHandler, RequestResponse } = require("./RequestHandler");
 class LoginHandler extends RequestHandler
 {
     requests = {
-        "/login": this.login,
-        "/signup": this.signup
+        "/login": this.login.bind(this),
+        "/signup": this.signup.bind(this)
     };
 
     async login({ name, password })
@@ -14,21 +14,22 @@ class LoginHandler extends RequestHandler
         try
         {
             let userId = await loginManager.loginValid(name, password);
-            return new RequestResponse({ message: "ok", undefined }); //to do: change undefined to menuHandler
+            return new RequestResponse({ ok: true, undefined }); //to do: change undefined to menuHandler
         }
         catch (error)
         {
-            return new RequestResponse({ error: error.message });
+            return new RequestResponse({ ok: false, error: error.message });
         }
     }
 
     async signup({ name, password })
     {
-        let loginManager = this.managers.loginManager;
-        let userExists = await loginManager.userExists(name, password);
-        let response = userExists ? { message: "ok" } : { error: "signup failed" };
+        let userExists = await this.managers.loginManager.userExists(name, password);
+        let response = userExists ? { ok: false, error: "user already exists" } : { ok: true };
+        if (response.ok)
+            await this.managers.loginManager.addUser(name, password);
         return new RequestResponse(response);
     }
 }
 
-module.exports.LoginHandler = LoginHandler;
+module.exports = LoginHandler;
