@@ -15,7 +15,7 @@ Managers
 	+executionManager
 
 RequestHandler:interface
-	constructor(managers)
+	constructor(managers, cookie)
 	+managers
 	+handleRequest(request, response)
 	// gets function to run (login, signup...)
@@ -23,18 +23,34 @@ RequestHandler:interface
 
 LoginHandler
 	+requests <path - handlerFunction>
-	constructor(cookie)
+	constructor(managers, cookie)
 	-login(name, password) : RequestResult
 	-signup(name, password) : RequestResult
 
 MenuHandler
 	+requests <path - handlerFunction>
-	constructor(cookie, userId)
-	-todo...
+	+userId
+	constructor(managers, cookie, userId)
+	// subs and points count
+	-getUserInfo(userId)
+	-getUserPosts(userId, previousIDs, filter)
+	-getGlobalPosts(previousIDs, filter)
+	// comments for post or another comment
+	-getComments(parentId, lastId, filter)
+
+	-post(title, content)
+	-removePost(postId)
+	-comment(postId, content)
+	-removeComment(commentId)
+	-like(globalId, value)
+	-subscribe(userId)
+
+	-logout()
+	-deleteUser(password)
 
 ChallengeHandler
 	+requests <path - handlerFunction>
-	constructor(cookie, userId, challengeId)
+	constructor(managers, cookie, userId, challengeId)
 	-todo...
 
 CookieManager
@@ -57,10 +73,21 @@ LoginManager
 	+removeUser(name)
 	+loginValid(name, password) : bool
 	+userExists(name) : bool
+	+deleteUser(password)
 
 ExecutionManager
 	constructor(database)
 	-test(code, challengeId)
+
+MenuManager
+	+database
+	+constructor(database)
+	+addPost(authorId, title, content)
+	+removePost(postId)
+	+addComment(authorId, parentId, content)
+	+removeComment(commentId)
+	+subscribe(srcId, dstId)
+	+like(userId, globalId, value)
 
 _RequestResult_
 	constructor(jsonResponse, newHandler)
@@ -72,7 +99,9 @@ Main --<> Managers
 Managers --<> LoginManager
 Managers --<> CookieManager
 Managers --<> ExecutionManager
+Managers --<> MenuManager
 LoginManager --<> Database
+MenuManager --<> Database
 
 CookieManager --<> RequestHandler
 

@@ -1,0 +1,30 @@
+Client
+
+Server
+
+Database
+
+Client- POST /posts<br/>{user: ariel, <br/>previousPostsIDs: ()} ->Server
+
+Server- SELECT LIMIT 2 ->Database
+Database- post1, post2 ->Server
+
+Server- {ok: true, <br/>posts: (post1, post2)} ->Client
+
+
+Client- load more posts ->Client
+Client- POST /posts<br/>{user: ariel, <br/>previousPostsIDs: (1, 2)} ->Server
+
+Server- SELECT LIMIT 2 ID NOT (1, 2) ->Database
+Database- post3, post4 ->Server
+
+Server- {ok: true, <br/>posts: (post3, post4)} ->Client
+
+
+Client- load more posts ->Client
+Client- POST /posts<br/>{user: ariel, <br/>previousPostsIDs: (1, 2, 3, 4)} ->Server
+
+Server- SELECT LIMIT 2 ID NOT (1, 2, 3, 4) ->Database
+Database- post5, post6 ->Server
+
+Server- {ok: true, <br/>posts: (post5, post6)} ->Client

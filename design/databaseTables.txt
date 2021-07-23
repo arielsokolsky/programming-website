@@ -13,22 +13,27 @@ Users
 	+name
 	+password
 	+points
+	+subscriberCount
 
 Posts
 	+id - GlobalId.id
 	+author_id - Users.id
 	+title
 	+content
+	+likeValue
 Posts --> Users
 Posts --> GlobalId
 
 Comments
 	+id - GlobalId.id
+	+commenterId - Users.id
 	+postId - Posts.id/Challenges.id
 	+content
+	+likeValue
 Comments --> Posts
 Comments --> Challenges
 Comments --> GlobalId
+Comments --> Users
 
 GlobalId
 	+id
