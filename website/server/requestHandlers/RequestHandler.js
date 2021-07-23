@@ -17,10 +17,12 @@ class RequestHandler
         }
         catch(error)
         {
-            response.send('{error: invalid request}');
+            response.send('{"error": "invalid request"}');
+            return;
         }
         // update state using cookie
-        this.managers.cookieManager.setState(this.cookie, result.newHandler);
+        if(result.newHandler)
+            this.managers.cookieManager.setState(this.cookie, result.newHandler);
         // send respons
         response.send(result.responseJson);
     }
@@ -33,7 +35,7 @@ class RequestHandler
 
 function RequestResponse(responseObject, newRequestHandler)
 {
-    this.respsoneJson = JSON.stringify(responseObject);
+    this.responseJson = JSON.stringify(responseObject);
     this.newHandler = newRequestHandler;
 }
 

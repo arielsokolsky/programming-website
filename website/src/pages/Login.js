@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Fetch from '../Fetch.js';
 import { Link, useHistory } from 'react-router-dom';
 
-const LOGIN_URL = "https://localhost:8080/login";
+const LOGIN_URL = "http://localhost:8080/login";
 
 function Login()
 {
@@ -21,7 +21,6 @@ function Login()
 		if (data.ok)
 		{
 			history.push({ pathname: "/home" });
-			console.log("/home");
 		}
 		else
 		{

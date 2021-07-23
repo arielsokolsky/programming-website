@@ -1,5 +1,6 @@
 const config = require("../Config.json");
 const Helper = require("../Helper")
+const LoginHandler = require("../requestHandlers/LoginHandler.js");
 
 //this class is responsible for managing the cookies
 class CookieManager
@@ -15,11 +16,11 @@ class CookieManager
         return cookie in this.stateMap;
     }
     //return random cookie
-    addCookie()
+    addCookie(managers)
     {
         let cookie = Helper.genrateRandomString(config.COOKIE_LENGTH, config.COOKIE_CHARS);
         //add the cookie and reset the requrestHandler
-        this.stateMap[cookie] = undefined;  //to do : set to new request handler
+        this.stateMap[cookie] = new LoginHandler(managers, cookie);
         return cookie;
     }
     //remove a cookie from the dictinary

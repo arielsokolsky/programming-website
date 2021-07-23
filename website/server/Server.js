@@ -5,6 +5,7 @@ const config = require('./Config.json');
 const Database = require('./Database.js');
 const Managers = require('./managers/Managers.js');
 const Helper = require('./Helper.js');
+const LoginHandler = require('./requestHandlers/LoginHandler.js');
 
 const app = express();
 const PORT = 8080;
@@ -39,12 +40,16 @@ app.use(express.static(path.join(__dirname, '../build')));
 		let cookie = Helper.getCookie(request);
 		if(managers.cookieManager.checkCookie(cookie))
 		{
-			managers.cookieManager.resetState();
-			loggedIn = true;
+			Helper.log(managers.cookieManager.getState(cookie));
+			if (!(managers.cookieManager.getState(cookie) instanceof LoginHandler))
+			{
+				managers.cookieManager.resetState();
+				loggedIn = true;
+			}
 		}
 		else
 		{
-			cookie = managers.cookieManager.addCookie();
+			cookie = managers.cookieManager.addCookie(managers);
 			response.cookie("sessionKey", cookie);
 		}
 		response.send(JSON.stringify({ loggedIn: loggedIn }));
@@ -52,7 +57,11 @@ app.use(express.static(path.join(__dirname, '../build')));
 
 	app.post('*', function (request, response)
 	{
-		managers.cookieManager.getState().handleRequest(request, response);
+		let cookie = Helper.getCookie(request);
+		if (cookie)
+			managers.cookieManager.getState(cookie).handleRequest(request, response);
+		else
+			response.send(JSON.stringify({ ok: false, error: "unauthenticated (no cookie)" }));
 	});
 
 	app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
