@@ -2,5 +2,8 @@
     "COOKIE_LENGTH": 16,
     "COOKIE_CHARS": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
     "DATABASE_FILE": "./Database.db",
-    "PASSWORD_SALT": "PlATyPus sAlT VeRY SECrEt"
+    "PASSWORD_SALT": "PlATyPus sAlT VeRY SECrEt",
+    "POST_CHAR_LIMIT" : 500,
+    "POST_TITLE_CHAR_LIMIT": 100,
+    "COMMENT_CHAR_LIMIT" : 300
 }
