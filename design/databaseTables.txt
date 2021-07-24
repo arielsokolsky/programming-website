@@ -27,7 +27,7 @@ Posts --> GlobalId
 Comments
 	+id - GlobalId.id
 	+commenterId - Users.id
-	+postId - Posts.id/Challenges.id
+	+postId - GlobalId.id
 	+content
 	+likeValue
 Comments --> Posts
