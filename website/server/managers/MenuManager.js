@@ -54,10 +54,16 @@ class MenuManager
 	}
 
 	//remove a post from the db
-	async removePost(postId) { }
+	removePost(postId)
+	{
+		this.database.run(`DELETE FROM Posts WHERE id = ?`, [postId]);
+	}
 
 	//remove a comment
-	async removeComment() { }
+	removeComment(commentId)
+	{
+		this.database.run(`DELETE FROM Comments WHERE id = ?`, [commentId]);
+	}
 
 	//get like values
 	async getLikeValue(userId, objectId) { }
