@@ -1,5 +1,6 @@
 const CookieManager = require('./CookieManager');
 const LoginManager = require('./LoginManager');
+const MenuManager = require('./MenuManager');
 
 // file manages manager objects
 class Managers
@@ -9,19 +10,22 @@ class Managers
         this.initDatabase(database);
         this.cookieManager = new CookieManager();
         this.loginManager = new LoginManager(database);
+        this.MenuManager = new MenuManager(database);
     }
     // method creates database's tables
     initDatabase(database)
     {
-        database.run(
+        database
+          .run(
             `CREATE TABLE IF NOT EXISTS Users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT NOT NULL UNIQUE,
-            password TEXT NOT NULL,
+            password TEXT NOT NULL UNIQUE,
             points INTEGER DEFAULT 0,
             subscriber_count INTEGER DEFAULT 0
             );`
-        ).catch(console.log);
+          )
+          .catch(console.log);
         
         //create Posts
         database.run(

@@ -12,7 +12,7 @@ class LoginManager
     addUser(name, password)
     {
         let hashedPassword = this.hash(password);
-        this.database.run(`INSERT INTO Users VALUES (NULL, ?, ?, 0);`, [name, hashedPassword])
+        this.database.run(`INSERT INTO Users(name, password) VALUES (?, ?);`, [name, hashedPassword])
             .catch(Helper.log);
     }
     // method removes user from the database

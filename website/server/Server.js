@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 {
 	let database = new Database(config.DATABASE_FILE);
 	let managers = new Managers(database);
+
 /*
 	// get app
 	app.get('/', function (request, response) 

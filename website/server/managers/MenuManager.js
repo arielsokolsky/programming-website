@@ -8,21 +8,19 @@ class MenuManager
 	//add a post to the db
 	addPost(authorId, title, content)
 	{
-		this.database.run(`INSERT INTO Posts(author_id, title, content) VALUES (?, ?, ?);`,
-			[authorId, title, content])
-			.catch(console.log);
+		this.database.run(`INSERT INTO Posts(author_id, title, content) VALUES (?, ?, ?);`,[authorId, title, content]);
 	}
 
 	//add a commant
 	addComment(authorId, parentId, content)
 	{
-		this.database.run(`INSERT INTO Comments(author_id, post_id, content) VALUES(?, ?, ?);`, [authorId, parentId, content]).catch(console.log);
+		this.database.run(`INSERT INTO Comments(author_id, object_id, content) VALUES(?, ?, ?);`, [authorId, parentId, content]);
 	}
 
 	//add a subscribe to the user
 	subscribe(srdId, dstId)
 	{
-		this.database.run(`INSERT INTO Subscribers(src_user, dst_user) VALUES(?, ?);`, [srdId, dstId]).catch(console.log);
+		this.database.run(`INSERT INTO Subscribers(src_user, dst_user) VALUES(?, ?);`, [srdId, dstId]);
 	}
 
 	//add a like to a object
@@ -32,13 +30,28 @@ class MenuManager
 	}
 
 	//add likes to comment
-	async addCommentLikes(commentId, amount){}
+	addCommentLikes(commentId, amount)
+	{
+		this.database.run(`UPDATE Comments SET like_value = like_value + ? WHERE id = ? `, [amount, commentId]);
+	}
 
 	//add likes to post
-	async addPostLikes(postId, amount) { }
+	addPostLikes(postId, amount)
+	{
+		this.database.run(
+      `UPDATE Posts SET like_value = like_value + ? WHERE id = ?`,
+      [amount, postId]
+    );
+	}
 
 	//add subscribers
-	async addSubscribers(userId, amount) { }
+	addSubscribers(userId, amount)
+	{
+		this.database.run(
+      `UPDATE Users SET subscriber_count = subscriber_count + ? WHERE id = ?`,
+      [amount, userId]
+    );
+	}
 
 	//remove a post from the db
 	async removePost(postId) { }
@@ -82,3 +95,5 @@ class MenuManager
 	//get the type of the object
 	async objectType(id) { }
 }
+
+module.exports = MenuManager;
