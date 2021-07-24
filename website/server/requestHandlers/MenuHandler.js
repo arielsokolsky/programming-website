@@ -45,6 +45,9 @@ class MenuHandler extends RequestHandler
     // method returns user's posts in order, not all at once
     async getUserPosts({ userId, previousIDs, filter })
     {
+        if (filter.type !== "likes" && filter.type !== "time" && filter.type !== "content")
+            return new RequestResponse({ ok: false, error: "Invalid filter" });
+
         let id = userId ?? this.userId;
         if (!await this.managers.loginManager.userExists(id))
         {
@@ -66,6 +69,9 @@ class MenuHandler extends RequestHandler
     // method returns posts from all users
     async getGlobalPosts({ previousIDs, filter })
     {
+        if (filter.type !== "likes" && filter.type !== "time" && filter.type !== "content")
+            return new RequestResponse({ ok: false, error: "Invalid filter" });
+        
         try
         {
             return new RequestResponse({
@@ -82,6 +88,9 @@ class MenuHandler extends RequestHandler
     // method gets comments from their parent (post / another comment)
     async getComments({ parentId, previousIDs, filter })
     {
+        if (filter.type !== "likes" && filter.type !== "time" && filter.type !== "content")
+            return new RequestResponse({ ok: false, error: "Invalid filter" });
+        
         if (!await this.managers.menuManager.objectIdExists(parentId))
         {
             return new RequestResponse({ ok: false, error: "Comment's parent doesn't exist" });
