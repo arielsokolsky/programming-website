@@ -7,6 +7,7 @@ class Managers
     constructor (database)
     {
         this.initDatabase(database);
+        this.database = database;
         this.cookieManager = new CookieManager();
         this.loginManager = new LoginManager(database);
     }
