@@ -26,7 +26,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 {
 	let database = new Database(config.DATABASE_FILE);
 	let managers = new Managers(database);
-
+/*
 	// get app
 	app.get('/', function (request, response) 
 	{
@@ -63,5 +63,5 @@ app.use(express.static(path.join(__dirname, '../build')));
 			response.send(JSON.stringify({ ok: false, error: "unauthenticated (no cookie)" }));
 	});
 
-	app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));
+	app.listen(PORT, () => console.log(`Server on http://localhost:${PORT}`));*/
 })();
