@@ -1,11 +1,16 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import { Switch, Route, useHistory } from 'react-router-dom';
-import Signup from './pages/Signup';
-import Login from './pages/Login.js';
-import Fetch from './Fetch.js';
+import "./App.css";
+import { useState, useEffect } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login.js";
+import Fetch from "./Fetch.js";
 
-const themePaths = ["colorPalettes/darkTheme.css", "colorPalettes/lightTheme.css"];
+import Dropdown from './components/Dropdown.js';
+
+const themePaths = [
+  "colorPalettes/darkTheme.css",
+  "colorPalettes/lightTheme.css",
+];
 
 function App()
 {
@@ -17,20 +22,15 @@ function App()
 		setColorPalette((colorPalette + 1) % themePaths.length);
 	}
 
-	useEffect(
-		() =>
+	useEffect(() =>
+	{
+		(async function ()
 		{
-			(async function ()
-			{
-				let data = await Fetch.get("http://localhost:8080/connection");
-				if (data.loggedIn)
-					history.push({ pathname: "/home" });
-				else
-					history.push({ pathname: "/login" });
-			})();
-		}
-		, []
-	);
+			let data = await Fetch.get("http://localhost:8080/connection");
+			if (data.loggedIn) history.push({ pathname: "/home" });
+			else history.push({ pathname: "/login" });
+		})();
+	}, []);
 
 	return (
 		<div>
@@ -41,8 +41,8 @@ function App()
 			<link href={themePaths[colorPalette]} rel="stylesheet" />
 
 			<Switch>
-				<Route exact path="/login" component={Login}/>
-				<Route exact path="/signup" component={Signup}/>
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/signup" component={Signup} />
 			</Switch>
 		</div>
 	);

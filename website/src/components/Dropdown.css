@@ -1,0 +1,16 @@
+.dropdown
+{
+    margin: 4px;
+    border-radius: 2px;
+    outline: none;
+    transition: filter 0.5s;
+}
+.dropdown:hover
+{
+    filter: brightness(115%);
+}
+
+.dropdownLabel
+{
+    margin: 4px;
+}
