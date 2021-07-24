@@ -50,17 +50,18 @@ class Managers
         
         //create Comments
         database.run(
-           `CREATE TABLE IF NOT EXISTS Comments(
+            `CREATE TABLE IF NOT EXISTS Comments(
             id INTEGER PRIMARY KEY,
             author_id INTEGER ,
-            post_id INTEGER,
+            object_id INTEGER,
             content TEXT NOT NULL,
             like_value INTEGER DEFAULT 0,
             FOREIGN KEY (id) REFERENCES ObjectId (id),
             FOREIGN KEY (author_id) REFERENCES Users (id) ON DELETE CASCADE,
-            FOREIGN KEY (post_id) REFERENCES ObjectId (id) ON DELETE CASCADE
-           );` 
-        ).catch(console.log);
+            FOREIGN KEY (object_id) REFERENCES ObjectId (id) ON DELETE CASCADE
+           );`
+          )
+          .catch(console.log);
         
         //create ObjectId
         database.run(
