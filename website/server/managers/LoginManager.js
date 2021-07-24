@@ -62,6 +62,12 @@ class LoginManager
         let count = await this.database.get(`SELECT COUNT(*) FROM Users WHERE name = ?;`, [name]);
         return count === 1;
     }
+    // method checks if a password is correct
+    async passwordValid(userId, password)
+    {
+        let hashedPassword = await this.database.get("SELECT password FROM Users WHERE id = ?;", [userId]);
+        return this.hash(password) === hashedPassword;
+    }
     // hashes password with salt
     hash(password)
     {

@@ -199,13 +199,11 @@ class MenuHandler extends RequestHandler
         // update like value
         try
         {
-            await this.managers.database.beginTransaction();
             await this.managers.menuManager.like(this.userId, objectId, value);
             if (type === "comment")
                 await this.managers.menuManager.addCommentLikes(value - currentLikeValue);
             else if (type === "post")
                 await this.managers.menuManager.addPostLikes(value - currentLikeValue);
-            await this.managers.database.endTransaction();
             return new RequestResponse({ ok: true });
         }
         catch (error)
@@ -234,10 +232,8 @@ class MenuHandler extends RequestHandler
         // update like value
         try
         {
-            await this.managers.database.beginTransaction();
             await this.managers.menuManager.subscribe(this.userId, userId);
             await this.managers.menuManager.addSubscribers(isSubscribed ? -1 : 1);
-            await this.managers.database.endTransaction();
             return new RequestResponse({ ok: true });
         }
         catch (error)
